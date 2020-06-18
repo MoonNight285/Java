@@ -1,0 +1,28 @@
+import java.util.Queue;
+import java.util.LinkedList;
+import java.lang.Integer;
+
+class Solution {
+    public int solution(int bridge_length, int weight, int[] truck_weights) {
+    	Queue<Integer> bridge = new LinkedList<>();
+    	Queue<Integer> time = new LinkedList<>();
+    	Queue<Integer> goal = new LinkedList<>();
+    	int i = 0, time_count = 1;
+    	
+    	while(truck_weights.length != goal.size()) {
+    		if(time.isEmpty() == false && time.peek() + bridge_length == time_count) {
+    			weight += bridge.peek();
+    			goal.add(bridge.remove());
+    			time.remove();
+    		}
+    		if(i < truck_weights.length && weight - truck_weights[i] >= 0) {
+    			weight -= truck_weights[i];
+    			bridge.add(truck_weights[i]);
+    			time.add(time_count);
+    			i++;
+    		}
+    		time_count++;
+    	}
+    	return time_count - 1;
+    }
+}

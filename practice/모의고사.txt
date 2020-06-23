@@ -1,0 +1,56 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.lang.Integer;
+
+class Solution {
+    public int[] solution(int[] answers) {
+    	int user1[] = {1,2,3,4,5};
+    	int user2[] = {2,1,2,3,2,4,2,5};
+    	int user3[] = {3,3,1,1,2,2,4,4,5,5};
+    	int user_idx[] = new int[] {0,0,0};
+    	int user_answer[] = new int[] {0,0,0};
+    	List<Integer> temp = new ArrayList<>();
+    	int flag = 0;
+    	
+    	for(int i = 0; i < answers.length; ++i) {
+    		if(user1[user_idx[0]] == answers[i])
+    			user_answer[0] += 1;
+    		if(user2[user_idx[1]] == answers[i])
+    			user_answer[1] += 1;
+    		if(user3[user_idx[2]] == answers[i])
+    			user_answer[2] += 1;
+    		
+    		user_idx[0] += 1;
+    		user_idx[1] += 1;
+    		user_idx[2] += 1;
+    		
+    		if(user_idx[0] == user1.length)
+    			user_idx[0] = 0;
+    		if(user_idx[1] == user2.length)
+    			user_idx[1] = 0;
+    		if(user_idx[2] == user3.length)
+    			user_idx[2] = 0;
+    	}
+    	
+    	System.out.println(user_answer[0]);
+    	System.out.println(user_answer[1]);
+    	System.out.println(user_answer[2]);
+    	
+    	for(int x = 0; x < 3; x++) {
+    		for(int y = 0; y < 3; y++) {
+    			if(user_answer[x] >= user_answer[y]) {
+    				flag++;
+    			}
+    		}
+    		if(flag == 3) 
+    			temp.add(x+1);
+    		flag = 0 ;
+    	}
+    	
+    	int result[] = new int[temp.size()];
+    	for(int i = 0; i < temp.size(); ++i)
+    		result[i] = temp.get(i);
+    	
+    	return result;
+    }
+}

@@ -1,0 +1,28 @@
+enum dayOfWeek{
+	SUN,MON,TUE,WED,THU,FRI,SAT
+}
+
+class Solution {
+	public String solution(int a, int b) {
+		int oneDay[] = new int[] {5,1,2,5,0,3,5,1,4,6,2,4};//1~12월의 1일의 요일정보
+		int oneDayCopy = 1;//1일
+		int dayStateMent = oneDay[a - 1];//현재 무슨 요일
+		dayOfWeek temp[] = dayOfWeek.values();
+		
+		while(b!= 1 && oneDayCopy != b) {
+			oneDayCopy++;
+			dayStateMent++;
+				
+			if(dayStateMent == 7)
+				dayStateMent = 0;
+		}
+			
+		for(int i = 0; i < 7; ++i) {
+			if(temp[i].ordinal() == dayStateMent) {
+				return temp[i].toString();
+			}
+		}
+		
+		return new String();	
+    }
+}

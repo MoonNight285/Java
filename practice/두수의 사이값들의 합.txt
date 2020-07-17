@@ -1,0 +1,31 @@
+import java.lang.Math;
+class Solution {
+	public long solution(int a, int b) {
+		long sum = 0;
+		if( (a < 0 && b >= 0) || (b < 0 && a >= 0) ) {
+			if(Math.abs(a) == Math.abs(b))
+				return 0;
+			else if(Math.abs(a) > Math.abs(b))
+				for(int x = Math.abs(b) + 1 ; x <= Math.abs(a) ; ++x)
+					sum += x;
+			else if(Math.abs(b) > Math.abs(a))
+				for(int x = Math.abs(a) + 1 ; x <= Math.abs(b) ; ++x)
+					sum += x;
+			
+			if(Math.abs(a) > Math.abs(b) && a < 0)
+				return sum * -1;
+			if(Math.abs(b) > Math.abs(a) && b < 0)
+				return sum * - 1;
+			return sum;
+		}
+		else {
+			if(a >= b)
+				for(int x = b; x <= a; ++x)
+					sum += x;
+			else
+				for(int x = a; x <= b; ++x)
+					sum += x;
+			return sum;
+		}
+    }
+}
